@@ -1,0 +1,215 @@
+/* ---------- Entrance board ---------- */
+.board {
+  background: var(--color-asphalt);
+  color: #fff;
+  border-radius: var(--radius-md);
+  padding: var(--space-5);
+}
+.board-title {
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-grey-300);
+  margin-bottom: var(--space-4);
+}
+.board-list { display: flex; flex-direction: column; }
+.board-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) 0;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+.board-row:last-child { border-bottom: none; }
+.board-name { color: #fff; font-weight: 600; flex: 1; min-width: 0; }
+.board-name:hover { color: var(--color-grey-200); }
+.board-level { font-size: var(--text-xs); font-weight: 700; padding: 2px var(--space-2); border-radius: var(--radius-sm); white-space: nowrap; }
+.board-level-ok { background: var(--color-green-tint); color: var(--color-green-dark); }
+.board-level-low { background: var(--color-amber-tint); color: var(--color-amber-dark); }
+.board-level-full, .board-level-none { background: var(--color-red-tint); color: var(--color-red-dark); }
+.board-count { font-family: var(--font-display); font-size: var(--text-lg); font-weight: 600; color: #fff; }
+.board-total { font-size: var(--text-sm); font-weight: 400; color: var(--color-grey-300); }
+.board-empty { color: var(--color-grey-300); }
+
+/* ---------- Location cards ---------- */
+.location-list { display: grid; gap: var(--space-4); }
+.location {
+  display: grid;
+  grid-template-columns: 1fr 14rem;
+  gap: var(--space-5);
+  background: var(--color-surface);
+  border: var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--space-5);
+}
+@media (max-width: 700px) { .location { grid-template-columns: 1fr; } }
+
+.location-main h3 { margin-bottom: var(--space-2); }
+.location-line { display: flex; align-items: center; gap: var(--space-2); color: var(--color-grey-700); font-size: var(--text-sm); }
+.location-description { color: var(--color-grey-700); font-size: var(--text-sm); }
+.location-facts { display: flex; flex-direction: column; gap: var(--space-1); margin-top: var(--space-3); }
+.location-facts li { display: flex; align-items: center; gap: var(--space-2); font-size: var(--text-sm); color: var(--color-grey-700); }
+.location-facts-row { display: flex; flex-wrap: wrap; gap: var(--space-4); align-items: center; color: var(--color-grey-700); font-size: var(--text-sm); margin-bottom: var(--space-5); }
+.location-facts-row p { display: flex; align-items: center; gap: var(--space-2); margin: 0; }
+
+.location-side { display: flex; flex-direction: column; gap: var(--space-3); border-left: var(--border); padding-left: var(--space-5); }
+@media (max-width: 700px) { .location-side { border-left: none; padding-left: 0; border-top: var(--border); padding-top: var(--space-4); } }
+
+.meter-figure { font-size: var(--text-sm); margin: 0 0 var(--space-1); }
+.meter-figure strong { font-family: var(--font-display); font-size: var(--text-lg); }
+.meter-total { color: var(--color-grey-500); }
+.meter-track { height: 6px; background: var(--color-grey-200); border-radius: 3px; overflow: hidden; }
+.meter-fill { display: block; height: 100%; background: var(--color-green); }
+.meter-low .meter-fill { background: var(--color-amber); }
+.meter-full .meter-fill, .meter-none .meter-fill { background: var(--color-red); }
+.location-rate { font-size: var(--text-sm); color: var(--color-grey-700); margin: 0; }
+
+.results-summary { font-size: var(--text-sm); color: var(--color-grey-500); margin-bottom: var(--space-4); }
+
+/* ---------- Parking plan (bay grid) ---------- */
+.plan {
+  background: var(--color-asphalt);
+  color: #fff;
+  border-radius: var(--radius-md);
+  padding: var(--space-5);
+}
+.plan-empty { color: var(--color-grey-500); }
+.plan-key { display: flex; gap: var(--space-4); flex-wrap: wrap; margin-bottom: var(--space-5); font-size: var(--text-xs); color: var(--color-grey-300); }
+.plan-key li { display: flex; align-items: center; gap: var(--space-2); }
+.key-swatch { width: 0.9rem; height: 0.9rem; border-radius: 2px; border: 1px solid rgba(255,255,255,0.5); }
+.key-available { background: transparent; }
+.key-reserved, .key-maintenance { background: var(--color-amber); border-color: var(--color-amber); }
+.key-occupied { background: var(--color-red); border-color: var(--color-red); }
+.key-selected { background: var(--color-blue); border-color: var(--color-blue); }
+
+.bank { margin-bottom: var(--space-5); }
+.bank:last-child { margin-bottom: 0; }
+.bank-title { font-family: var(--font-display); font-size: var(--text-sm); font-weight: 600; letter-spacing: 0.02em; color: var(--color-grey-300); margin-bottom: var(--space-3); }
+.bank-bays { display: flex; flex-wrap: wrap; gap: var(--space-3); }
+
+.bay {
+  width: 3.75rem;
+  height: 4.75rem;
+  background: rgba(255,255,255,0.04);
+  border: none;
+  border-left: 2px solid rgba(255,255,255,0.55);
+  border-right: 2px solid rgba(255,255,255,0.55);
+  border-top: 2px solid rgba(255,255,255,0.55);
+  border-radius: 2px 2px 0 0;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-2) var(--space-1);
+  cursor: pointer;
+  font-family: var(--font-display);
+}
+.bay:hover:not(:disabled) { background: rgba(255,255,255,0.12); }
+.bay-number { font-size: var(--text-sm); font-weight: 600; }
+.bay-mark { display: flex; align-items: center; justify-content: center; height: 1.1rem; }
+.bay-led { width: 0.5rem; height: 0.5rem; border-radius: 50%; background: var(--color-green); }
+
+.bay-reserved, .bay-maintenance { background: rgba(176, 118, 15, 0.28); border-color: var(--color-amber); }
+.bay-reserved .bay-led, .bay-maintenance .bay-led { background: var(--color-amber); }
+.bay-occupied { background: rgba(196, 67, 44, 0.28); border-color: var(--color-red); }
+.bay-occupied .bay-led { background: var(--color-red); }
+.bay.is-selected { background: rgba(12, 77, 162, 0.5); border-color: #fff; }
+.bay.is-locked { cursor: not-allowed; opacity: 0.55; }
+.bay.is-locked:hover { background: rgba(255,255,255,0.04); }
+.bay.is-dimmed { opacity: 0.35; }
+
+/* ---------- Booking layout ---------- */
+.booking { display: grid; grid-template-columns: 1fr 20rem; gap: var(--space-6); align-items: start; margin-top: var(--space-6); }
+.booking-summary { position: sticky; top: var(--space-4); }
+@media (max-width: 900px) {
+  .booking { grid-template-columns: 1fr; }
+  .booking-summary { position: static; }
+}
+
+.summary { display: flex; flex-direction: column; gap: var(--space-3); margin: 0 0 var(--space-4); }
+.summary > div { display: flex; justify-content: space-between; gap: var(--space-3); font-size: var(--text-sm); }
+.summary dt { color: var(--color-grey-500); }
+.summary dd { margin: 0; font-weight: 600; text-align: right; }
+.summary-total { border-top: var(--border); padding-top: var(--space-3); }
+.summary-total dd { font-family: var(--font-display); font-size: var(--text-lg); color: var(--color-blue); }
+.summary-sub { display: block; font-weight: 400; color: var(--color-grey-500); font-size: var(--text-xs); }
+.summary-note { font-size: var(--text-xs); color: var(--color-grey-500); margin-bottom: var(--space-4); }
+.summary-blocker { font-size: var(--text-xs); color: var(--color-amber-dark); font-weight: 600; margin-top: var(--space-2); }
+.summary-modal dd { text-align: right; }
+
+.rates { margin-bottom: var(--space-6); }
+
+/* ---------- Tickets (reservations) ---------- */
+.ticket-list { display: flex; flex-direction: column; gap: var(--space-4); }
+.ticket {
+  display: grid;
+  grid-template-columns: 6rem 1fr;
+  border: var(--border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: var(--color-surface);
+}
+.ticket-stub {
+  background: var(--color-asphalt);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-1);
+  padding: var(--space-3);
+  border-right: 2px dashed rgba(255,255,255,0.35);
+}
+.ticket-stub-label { font-size: var(--text-xs); text-transform: uppercase; letter-spacing: 0.06em; color: var(--color-grey-300); }
+.ticket-bay { font-family: var(--font-display); font-size: var(--text-xl); font-weight: 700; }
+.ticket-body { padding: var(--space-4); }
+.ticket-head { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); margin-bottom: var(--space-2); }
+.ticket-head h3 { margin: 0; }
+.ticket-when { font-size: var(--text-sm); color: var(--color-grey-700); margin-bottom: var(--space-3); }
+.ticket-duration { color: var(--color-grey-500); }
+.ticket-facts { display: flex; gap: var(--space-5); flex-wrap: wrap; margin: 0 0 var(--space-3); }
+.ticket-facts dt { font-size: var(--text-xs); color: var(--color-grey-500); margin-bottom: 2px; }
+.ticket-facts dd { margin: 0; font-size: var(--text-sm); font-weight: 600; }
+.ticket-actions { display: flex; gap: var(--space-3); }
+.ticket-cancelled .ticket-stub { background: var(--color-grey-700); }
+@media (max-width: 480px) { .ticket { grid-template-columns: 1fr; } .ticket-stub { flex-direction: row; border-right: none; border-bottom: 2px dashed rgba(255,255,255,0.35); padding: var(--space-2) var(--space-4); } }
+
+/* ---------- Vehicles ---------- */
+.vehicle-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr)); gap: var(--space-4); }
+.vehicle {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  background: var(--color-surface);
+  border: var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+}
+.plate {
+  align-self: flex-start;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--text-md);
+  letter-spacing: 0.05em;
+  background: #fff;
+  color: var(--color-ink);
+  border: 2px solid var(--color-ink);
+  border-radius: var(--radius-sm);
+  padding: var(--space-1) var(--space-3);
+}
+.vehicle-type { display: flex; align-items: center; gap: var(--space-2); font-weight: 600; margin: 0; }
+.vehicle-details { margin: 0; font-size: var(--text-sm); color: var(--color-grey-500); }
+.vehicle-actions { display: flex; gap: var(--space-2); margin-top: auto; }
+.vehicle-compact { padding: var(--space-3); }
+
+/* ---------- Auth pages ---------- */
+.auth { max-width: 26rem; padding: var(--space-8) var(--space-4); }
+.auth-panel { background: var(--color-surface); border: var(--border); border-radius: var(--radius-md); padding: var(--space-6); }
+.auth-intro { color: var(--color-grey-700); margin-bottom: var(--space-5); }
+.auth-switch { margin-top: var(--space-5); font-size: var(--text-sm); text-align: center; }
+
+/* ---------- Details lists (reservation / general) ---------- */
+.details { display: grid; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); gap: var(--space-4); background: var(--color-surface); border: var(--border); border-radius: var(--radius-md); padding: var(--space-5); }
+.details dt { font-size: var(--text-xs); color: var(--color-grey-500); margin-bottom: var(--space-1); }
+.details dd { margin: 0; font-weight: 600; }

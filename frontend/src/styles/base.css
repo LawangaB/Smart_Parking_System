@@ -1,0 +1,84 @@
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+  color: var(--color-ink);
+  background: var(--color-marking);
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: var(--leading-tight);
+  margin: 0 0 var(--space-2);
+  letter-spacing: 0.01em;
+}
+h1 { font-size: var(--text-2xl); }
+h2 { font-size: var(--text-xl); }
+h3 { font-size: var(--text-md); }
+
+p { margin: 0 0 var(--space-3); }
+p:last-child { margin-bottom: 0; }
+
+a { color: var(--color-blue); }
+a:hover { color: var(--color-blue-dark); }
+
+ul, ol { margin: 0; padding: 0; list-style: none; }
+
+img, svg { display: block; max-width: 100%; }
+
+button { font-family: inherit; }
+
+:focus-visible { outline: none; box-shadow: var(--focus-ring); border-radius: var(--radius-sm); }
+
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: var(--space-4);
+  background: var(--color-ink);
+  color: #fff;
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-sm);
+  z-index: 200;
+  transition: top 0.15s ease;
+}
+.skip-link:focus { top: var(--space-2); }
+
+.container { max-width: var(--container-width); margin: 0 auto; padding: 0 var(--space-5); }
+
+.lead { font-size: var(--text-md); color: var(--color-grey-700); }
+.muted { color: var(--color-grey-500); }
+
+.stack { display: flex; flex-direction: column; gap: var(--space-4); }
+
+.num { text-align: right; font-variant-numeric: tabular-nums; }
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--color-grey-700);
+  margin-bottom: var(--space-4);
+}
+.back-link:hover { color: var(--color-blue); }
+
+@media (max-width: 640px) {
+  .container { padding: 0 var(--space-4); }
+}

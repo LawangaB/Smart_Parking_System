@@ -1,0 +1,116 @@
+/**
+ * DESIGN PLAN (written before any component CSS, reviewed against the anti-generic
+ * checklist in frontend-design/SKILL.md before building).
+ *
+ * SUBJECT: a parking reservation system. The whole visual language is grounded in real
+ * car-park furniture: the entrance board that shows free bays, the painted bay on the
+ * asphalt, the printed ticket stub, the number plate. Nothing here is decoration for its
+ * own sake; every recurring shape already exists in a real car park.
+ *
+ * COLOUR (named, not a random palette):
+ *   Ink        #14171C  body text
+ *   Asphalt    #1E2229  the "signage" surfaces: hero band, entrance board, admin sidebar
+ *   Marking    #F5F6F3  page background - the colour of a painted line on tarmac, not cream
+ *   Signage blue   #0C4DA2  the one brand/action colour, taken from a highway "P" sign
+ *   Bay green  #2E8B57  available / good / completed
+ *   Bay amber  #D08A1E  reserved / needs attention / maintenance
+ *   (a utility red, #C4432C, exists only for destructive actions and "occupied/full" -
+ *    it is a system colour, not part of the four-colour brand identity above)
+ *
+ * TYPE: Barlow / Barlow Condensed. Not a random pairing - Barlow was drawn directly from
+ * California license plates and highway signage, which is exactly this product's subject.
+ * Condensed is used only where real signage uses condensed type: bay numbers, the board's
+ * bay counts, big stats, the nav brand. Regular Barlow carries every sentence of prose.
+ *
+ * LAYOUT: left-aligned throughout - this is a utility tool, not a marketing page, so
+ * nothing is centered for effect. Numbers in tables are right-aligned (typographic
+ * convention). Surfaces are flat: a hairline border plus a flat colour, never a soft
+ * drop-shadow "SaaS card". Status is shown with a small solid dot/edge in the state
+ * colour, next to a word - colour never carries meaning alone.
+ *
+ * Bay grid sketch (the centrepiece):
+ *   ┌────┐┌────┐┌────┐┌────┐
+ *   │A01 ││A02 ││A03 ││A04 │   <- open-bottom, three-sided "paint" border
+ *   └────┘└────┘└────┘└────┘
+ *   ┌────┐┌────┐
+ *   │M01 ││M02 │
+ *   └────┘└────┘
+ *
+ * Entrance board sketch (dark panel, condensed numerals, like an LED board):
+ *   FREE BAYS THIS HOUR
+ *   Central Plaza Parking ............ 42 / 60
+ *   Riverside Mall Garage ............  3 / 40
+ *   Airport Long-Stay Lot ............  0 / 55
+ *
+ * REVIEW AGAINST THE GENERIC-AI CHECKLIST:
+ *   - No cream+terracotta palette; no near-black-with-one-neon-accent used everywhere -
+ *     the dark asphalt treatment is scoped to specific "signage" surfaces (hero, board,
+ *     admin sidebar), not the whole app, and it is motivated by the subject, not decor.
+ *   - No uniform rounded SaaS card kit: flat panels, 4-6px radius, a coloured status dot
+ *     or left edge instead of a grey shadow on every box.
+ *   - No ALL-CAPS section eyebrows glued above headings. The one place capitals appear is
+ *     the entrance board's own title and its bay-count row, and the plan's legend swatches
+ *     - literal signage, not a decorative label pattern repeated site-wide.
+ *   - No monospace "data label" mannerism; numerals use the condensed signage face instead.
+ *   - No trailing arrow glyphs on buttons, no middle-dot-joined meta text, no em-dash labels.
+ */
+
+:root {
+  /* Colour */
+  --color-ink: #14171c;
+  --color-asphalt: #1e2229;
+  --color-asphalt-raised: #272c34;
+  --color-marking: #f5f6f3;
+  --color-surface: #ffffff;
+  --color-blue: #0c4da2;
+  --color-blue-dark: #093a7c;
+  --color-blue-tint: #e7eef8;
+  --color-green: #2e8b57;
+  --color-green-dark: #226b43;
+  --color-green-tint: #e6f2ec;
+  --color-amber: #b3760f;
+  --color-amber-dark: #8f5f0c;
+  --color-amber-tint: #faf0dc;
+  --color-red: #c4432c;
+  --color-red-dark: #9d3521;
+  --color-red-tint: #f8e7e3;
+  --color-grey-100: #eceeef;
+  --color-grey-200: #dde0e2;
+  --color-grey-300: #c9cdd1;
+  --color-grey-500: #767c86;
+  --color-grey-700: #454b54;
+
+  /* Type */
+  --font-body: 'Barlow', 'Helvetica Neue', Arial, sans-serif;
+  --font-display: 'Barlow Condensed', 'Helvetica Neue', Arial, sans-serif;
+  --text-xs: 0.8125rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-md: 1.125rem;
+  --text-lg: 1.375rem;
+  --text-xl: 1.75rem;
+  --text-2xl: 2.25rem;
+  --text-3xl: 2.875rem;
+  --leading-tight: 1.15;
+  --leading-normal: 1.5;
+
+  /* Space (4px base) */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+
+  /* Shape */
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 10px;
+  --border: 1px solid var(--color-grey-300);
+  --border-strong: 2px solid var(--color-ink);
+  --shadow-modal: 0 12px 32px rgba(20, 23, 28, 0.28);
+  --container-width: 72rem;
+  --focus-ring: 0 0 0 3px var(--color-blue-tint), 0 0 0 1px var(--color-blue);
+}
