@@ -3,6 +3,7 @@ import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { TextField } from '../components/Field';
 import ErrorMessage from '../components/ErrorMessage';
+import PointerGlowPanel from '../components/PointerGlowPanel';
 import * as check from '../utils/validators';
 
 export default function Login() {
@@ -39,7 +40,7 @@ export default function Login() {
 
   return (
     <div className="auth-page">
-      <div className="auth-panel">
+      <PointerGlowPanel>
         <h1>Log in</h1>
         <p className="auth-intro">Welcome back. Log in to reserve a bay and manage your bookings.</p>
 
@@ -62,7 +63,7 @@ export default function Login() {
         <p className="auth-switch">
           New here? <Link to="/register">Create an account</Link>
         </p>
-      </div>
+      </PointerGlowPanel>
     </div>
   );
 }

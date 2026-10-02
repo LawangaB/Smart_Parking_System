@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
-import { LogOut, Menu, X } from 'lucide-react';
+import { LogOut, Menu, Moon, Sun, X } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { useToast } from '../context/ToastContext';
 import BrandMark from './BrandMark';
@@ -11,9 +11,19 @@ export default function Navbar() {
   const navigate = useNavigate();
   const location = useLocation();
   const [open, setOpen] = useState(false);
+  const [theme, setTheme] = useState(() => {
+    const savedTheme = window.localStorage.getItem('smart-parking-theme');
+    if (savedTheme === 'light' || savedTheme === 'dark') return savedTheme;
+    return window.matchMedia?.('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  });
 
   // Close the mobile menu after every navigation.
   useEffect(() => setOpen(false), [location.pathname]);
+
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme;
+    window.localStorage.setItem('smart-parking-theme', theme);
+  }, [theme]);
 
   const links = [];
   const home = '/';
@@ -52,6 +62,15 @@ export default function Navbar() {
           )}
 
           <div className="navbar-account">
+            <button
+              type="button"
+              className="theme-toggle"
+              aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
+              title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
+              onClick={() => setTheme((current) => current === 'dark' ? 'light' : 'dark')}
+            >
+              {theme === 'dark' ? <Sun size={18} aria-hidden="true" /> : <Moon size={18} aria-hidden="true" />}
+            </button>
             {user ? (
               <>
                 <span className="navbar-user">{user.fullName}</span>

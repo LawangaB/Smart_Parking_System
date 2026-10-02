@@ -4,6 +4,7 @@ import { useAuth } from '../context/AuthContext';
 import { useToast } from '../context/ToastContext';
 import { TextField } from '../components/Field';
 import ErrorMessage from '../components/ErrorMessage';
+import PointerGlowPanel from '../components/PointerGlowPanel';
 import * as check from '../utils/validators';
 
 export default function Register() {
@@ -51,7 +52,7 @@ export default function Register() {
 
   return (
     <div className="auth-page">
-      <div className="auth-panel">
+      <PointerGlowPanel>
         <h1>Create your account</h1>
         <p className="auth-intro">You need an account to reserve bays and keep track of your bookings.</p>
 
@@ -93,7 +94,7 @@ export default function Register() {
         <p className="auth-switch">
           Already registered? <Link to="/login">Log in</Link>
         </p>
-      </div>
+      </PointerGlowPanel>
     </div>
   );
 }
