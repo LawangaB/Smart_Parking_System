@@ -1,0 +1,64 @@
+services:
+
+  mysql:
+    image: mysql:8.0
+    container_name: smart-parking-mysql_1
+    restart: unless-stopped
+
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: smart_parking_db
+
+    ports:
+      - "3307:3306"
+
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-prootpassword"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+
+    container_name: smart-parking-backend
+    restart: unless-stopped
+
+    ports:
+      - "5001:5000"
+
+    env_file:
+      - ./backend/.env
+
+    environment:
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_NAME: smart_parking_db
+      DB_USER: root
+      DB_PASSWORD: rootpassword
+
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+  frontend:
+    build:
+      context: ./frontend
+
+    container_name: smart-parking-frontend
+    restart: unless-stopped
+
+    ports:
+      - "3001:3000"
+
+    depends_on:
+      - backend
+
+volumes:
+  mysql_data:
+
