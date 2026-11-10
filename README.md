@@ -135,3 +135,4 @@ frontend/
   `localhost` and `127.0.0.1` count as different origins to the browser).
 - **`npm test` in the backend fails to find `tests/**/*.test.js`**: this glob pattern needs
   Node.js 22+; on an older Node version, run `node --test --test-concurrency=1 tests/api.test.js tests/unit/*.test.js` directly.
+Horeeeeee
