@@ -1,0 +1,99 @@
+pipeline {
+    agent any
+
+    tools {
+        nodejs 'NodeJS22'
+    }
+
+    options {
+        timestamps()
+        disableConcurrentBuilds()
+    }
+
+    stages {
+
+        stage('Checkout') {
+            steps {
+                git branch: 'main',
+                    url: 'https://github.com/LawangaB/Smart_Parking_System.git'
+            }
+        }
+
+        stage('Backend Install') {
+            steps {
+                dir('backend') {
+                    sh 'npm install'
+                }
+            }
+        }
+
+        stage('Frontend Install') {
+            steps {
+                dir('frontend') {
+                    sh 'npm install'
+                }
+            }
+        }
+
+        stage('Frontend Build') {
+            steps {
+                dir('frontend') {
+                    sh 'npm run build'
+                }
+            }
+        }
+
+        stage('Docker Build') {
+            steps {
+                sh 'docker compose build'
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                sh 'docker compose up -d --build --remove-orphans'
+            }
+        }
+
+        stage('Verify Deployment') {
+            steps {
+                sh 'docker compose ps'
+            }
+        }
+    }
+    stage('Docker Build') {
+    steps {
+        echo 'Building Docker images...'
+
+        sh 'docker compose build'
+    }
+}
+
+stage('Deploy') {
+    steps {
+        echo 'Deploying Smart Parking System...'
+
+        sh 'docker compose up -d --build --remove-orphans'
+    }
+}
+
+stage('Verify Deployment') {
+    steps {
+        echo 'Checking deployed containers...'
+
+        sh 'docker compose ps'
+    }
+}
+
+
+    post {
+        success {
+            echo 'Smart Parking System deployed successfully!'
+        }
+
+        failure {
+            echo 'Smart Parking deployment failed!'
+        }
+    }
+}
+
