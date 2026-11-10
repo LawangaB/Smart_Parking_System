@@ -137,3 +137,4 @@ frontend/
   Node.js 22+; on an older Node version, run `node --test --test-concurrency=1 tests/api.test.js tests/unit/*.test.js` directly.
 Horeeeeee
 Horeeeeee2
+hooooooo
