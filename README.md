@@ -138,7 +138,5 @@ frontend/
 Horeeeeee
 Horeeeeee2
 hooooooo
-ooooooooooooooooooooops
-abdkjhfehf
-gjhoijrsogfiewrn
-dnbkjchsbkjc
+
+
