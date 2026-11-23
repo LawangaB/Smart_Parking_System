@@ -1,6 +1,3 @@
-
-
-```yaml
 services:
 
   # MySQL Database
@@ -142,4 +139,4 @@ volumes:
 volumes:
   mysql_data:
     driver: local
-```
+
