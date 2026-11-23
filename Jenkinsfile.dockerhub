@@ -1,1 +1,94 @@
+```groovy
+pipeline {
 
+    agent any
+
+    environment {
+        FRONTEND_IMAGE = 'gayan2223/smart-parking-frontend'
+        BACKEND_IMAGE  = 'gayan2223/smart-parking-backend'
+    }
+
+    stages {
+
+        stage('Checkout') {
+            steps {
+                echo 'Checking out Smart Parking source code...'
+                checkout scm
+            }
+        }
+
+        stage('Build Docker Images') {
+            steps {
+                echo 'Building frontend and backend images...'
+
+                sh 'docker compose build'
+            }
+        }
+
+        stage('Tag Docker Images') {
+            steps {
+                echo 'Tagging images with Jenkins build number...'
+
+                sh '''
+                    docker tag ${FRONTEND_IMAGE}:latest \
+                        ${FRONTEND_IMAGE}:${BUILD_NUMBER}
+
+                    docker tag ${BACKEND_IMAGE}:latest \
+                        ${BACKEND_IMAGE}:${BUILD_NUMBER}
+                '''
+            }
+        }
+
+        stage('Docker Hub Login') {
+            steps {
+                withCredentials([
+                    usernamePassword(
+                        credentialsId: 'dockerhub-credentials',
+                        usernameVariable: 'DOCKER_USER',
+                        passwordVariable: 'DOCKER_PASSWORD'
+                    )
+                ]) {
+                    sh '''
+                        set +x
+                        printf '%s' "$DOCKER_PASSWORD" |
+                        docker login -u "$DOCKER_USER" --password-stdin
+                    '''
+                }
+            }
+        }
+
+        stage('Push Frontend Image') {
+            steps {
+                sh '''
+                    docker push ${FRONTEND_IMAGE}:latest
+                    docker push ${FRONTEND_IMAGE}:${BUILD_NUMBER}
+                '''
+            }
+        }
+
+        stage('Push Backend Image') {
+            steps {
+                sh '''
+                    docker push ${BACKEND_IMAGE}:latest
+                    docker push ${BACKEND_IMAGE}:${BUILD_NUMBER}
+                '''
+            }
+        }
+    }
+
+    post {
+
+        always {
+            sh 'docker logout || true'
+        }
+
+        success {
+            echo 'SUCCESS: Both images pushed to Docker Hub!'
+        }
+
+        failure {
+            echo 'ERROR: Docker Hub pipeline failed!'
+        }
+    }
+}
+```
