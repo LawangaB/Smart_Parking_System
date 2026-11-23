@@ -19,7 +19,6 @@ pipeline {
         stage('Build Docker Images') {
             steps {
                 echo 'Building frontend and backend images...'
-
                 sh 'docker compose build'
             }
         }
@@ -42,7 +41,7 @@ pipeline {
             steps {
                 withCredentials([
                     usernamePassword(
-                        credentialsId: 'dockerhub-credentials',
+                        credentialsId: 'DOCKER_HUB',
                         usernameVariable: 'DOCKER_USER',
                         passwordVariable: 'DOCKER_PASSWORD'
                     )
@@ -90,4 +89,3 @@ pipeline {
         }
     }
 }
-
